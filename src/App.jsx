@@ -11,10 +11,12 @@ const App = () => {
           <VideoCard
             key={video.id}
             thumbnail={video.thumbnail}
+            avatar={video.avatar}
             title={video.title}
             author={video.author}
             views={video.views}
             time={video.time}
+            duration={video.duration}
           />
         ))}
       </div>
