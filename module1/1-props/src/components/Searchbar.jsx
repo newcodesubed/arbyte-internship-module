@@ -4,7 +4,7 @@ const Searchbar = () => {
   return (
     <header className="flex items-center justify-between p-4 border-b bg-white sticky top-0 z-50">
       {/* Left: Logo */}
-      <div className="text-xl font-bold text-red-600"> YouTube</div>
+      <div className="text-xl font-bold text-red-600">YouTube</div>
 
       {/* Center: Search Bar */}
       <div className="flex flex-1 max-w-2xl mx-4">
