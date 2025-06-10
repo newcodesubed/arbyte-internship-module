@@ -1,1 +1,11 @@
 @import "tailwindcss";
+.freckle-face-regular {
+  font-family: "Freckle Face", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+.ephesis-regular {
+  font-family: "Ephesis", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
