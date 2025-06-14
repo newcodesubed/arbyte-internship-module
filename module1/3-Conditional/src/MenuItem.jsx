@@ -21,7 +21,7 @@ function MenuItem({ item }) {
       </div>
 
       {/* Right Image */}
-      <div className="w-32 h-32 overflow-hidden">
+      <div className="w-50 h-50 overflow-hidden">
         <img
           src={item.image}
           alt={item.name}

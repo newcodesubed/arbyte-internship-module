@@ -42,7 +42,7 @@ const UserForm = () => {
       {/* Top Right Button */}
       <div className="absolute top-4 right-4">
         <button
-          className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition"
+          className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition cursor-pointer"
           onClick={() => setShowForm((prev) => !prev)}
         >
           {showForm ? "View Submissions" : "Add New Entry"}
