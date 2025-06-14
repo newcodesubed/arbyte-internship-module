@@ -2,6 +2,7 @@ import { useState } from "react";
 import menuData from "./menuData";
 import MenuItem from "./MenuItem";
 import { Utensils, Pizza, Drumstick, CupSoda, Star } from "lucide-react";
+import ListRenderer from "./ListRenderer";
 
 function MainMenu({ user }) {
   const [filter, setFilter] = useState("All");
@@ -24,31 +25,19 @@ function MainMenu({ user }) {
       {/* Header */}
       <header className="flex justify-between items-center mb-4">
         <div className="text-lg font-semibold">
-          {user.name} ({user.number})
+          <ListRenderer
+            data={[user]} // 👈 wrap the user object in an array
+            keyExtractor={(user) => user.id}
+            renderItem={(user) => (
+              <div className="p-2 border rounded flex">
+                <h3>
+                  {user.name} {user.number}
+                </h3>
+              </div>
+            )}
+          />
         </div>
-        {/* <div>
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className="bg-white text-black px-3 py-1 rounded"
-          >
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-        </div> */}
-        {/* second */}
-        {/* <select
-  value={filter}
-  onChange={(e) => setFilter(e.target.value)}
-  className="bg-white text-black px-3 py-1 rounded"
->
-  {categories.map((cat) => (
-    <option key={cat} value={cat}>
-      {cat}
-    </option>
-  ))}
-</select> */}
+
         <div className="flex flex-wrap gap-2 mb-4">
           {categories.map((cat) => (
             <button
@@ -68,9 +57,11 @@ function MainMenu({ user }) {
 
       {/* Menu Items */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2  lg:grid-cols-3">
-        {filteredData.map((item, idx) => (
-          <MenuItem key={`${item.name}-${idx}`} item={item} />
-        ))}
+        <ListRenderer
+          data={filteredData}
+          itemKey={(item) => item.id}
+          renderItem={(item) => <MenuItem item={item} />}
+        />
       </div>
     </div>
   );
