@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 
 function MenuItem({ item }) {
+  if (!item || !item.ingredients) return null;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="bg-white text-black flex w-full md:w-1/2 lg:w-1/3 rounded-xl overflow-hidden shadow-lg"
+      className="bg-white text-black flex w-full  rounded-xl overflow-hidden shadow-lg"
     >
       {/* Left Content */}
       <div className="p-4 flex-1">

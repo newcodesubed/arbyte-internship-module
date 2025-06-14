@@ -67,9 +67,9 @@ function MainMenu({ user }) {
       </header>
 
       {/* Menu Items */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {filteredData.map((item, index) => (
-          <MenuItem key={index} item={item} />
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2  lg:grid-cols-3">
+        {filteredData.map((item, idx) => (
+          <MenuItem key={`${item.name}-${idx}`} item={item} />
         ))}
       </div>
     </div>
