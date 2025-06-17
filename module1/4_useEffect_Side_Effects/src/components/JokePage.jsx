@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useInterval from "../hooks/useInterval";
 import Clock from "./Clock";
 
 const JokePage = () => {
@@ -16,6 +17,7 @@ const JokePage = () => {
       setJoke(data.joke);
     } catch (err) {
       setJoke("Failed to load joke.");
+      console.log(err);
     }
   };
 
@@ -26,6 +28,11 @@ const JokePage = () => {
       setLoading(false);
     }, 2000);
   }, []);
+
+  useInterval(() => {
+    fetchJoke();
+  }, 15000);
+
   return (
     <div className="container">
       <Clock />
@@ -34,4 +41,5 @@ const JokePage = () => {
     </div>
   );
 };
+
 export default JokePage;
