@@ -1,5 +1,7 @@
+import Login from "./components/LoginForm";
+
 function App() {
-  return <div>HEllo</div>;
+  return <Login />;
 }
 
 export default App;
