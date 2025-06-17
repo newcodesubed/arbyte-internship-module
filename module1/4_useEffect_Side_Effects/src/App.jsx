@@ -1,9 +1,17 @@
-import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import JokePage from "./components/JokePage";
+import "./index.css";
+
 function App() {
-  useEffect(function () {
-    alert("Component mounted");
-  }, []);
-  return <p>You are using this app</p>;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/joke" element={<JokePage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
