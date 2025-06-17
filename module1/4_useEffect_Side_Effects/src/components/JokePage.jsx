@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Clock from "./Clock";
 
 const JokePage = () => {
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,7 @@ const JokePage = () => {
   }, []);
   return (
     <div className="container">
+      <Clock />
       <h2>Dad Joke:</h2>
       {loading ? <p>Loading...</p> : <p className="joke">{joke}</p>}
     </div>
