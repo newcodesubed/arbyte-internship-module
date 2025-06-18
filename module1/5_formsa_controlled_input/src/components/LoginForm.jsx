@@ -31,8 +31,11 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (validate()) {
       alert("Login successful!");
+      setEmail("");
+      setPassword("");
       setError({ email: "", password: "" });
     }
   };

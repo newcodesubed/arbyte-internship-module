@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useFormField from "../Hooks/useFormField";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -9,6 +9,7 @@ const ContactForm = () => {
   const [gender, setGender] = useState("");
   const [socialApp, setSocialApp] = useState("");
   const [captchaValue, setCaptchaValue] = useState(null);
+  const recaptchaRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +37,9 @@ const ContactForm = () => {
     setGender("");
     setSocialApp("");
     setCaptchaValue(null);
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset();
+    }
   };
 
   return (
@@ -132,6 +136,7 @@ const ContactForm = () => {
 
       {/* reCAPTCHA */}
       <ReCAPTCHA
+        ref={recaptchaRef}
         sitekey="6LdQKGUrAAAAAAnQ1OlMGNJvWsTesZc40Y8EJtPb"
         onChange={(value) => setCaptchaValue(value)}
       />
