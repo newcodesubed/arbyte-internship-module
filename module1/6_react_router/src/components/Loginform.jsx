@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { login } from "../services/apiAuth";
+import { useLogin } from "./useLogin";
 
 function LoginForm() {
   const [email, setEmail] = useState("subed@example.com");
   const [password, setPassword] = useState("admin");
-
+  const { login, isLoading } = useLogin();
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -32,6 +32,7 @@ function LoginForm() {
             autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="you@example.com"
@@ -49,6 +50,7 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={isLoading}
             className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="••••••••"
           />
@@ -56,9 +58,10 @@ function LoginForm() {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-200"
         >
-          Login
+          {!isLoading ? "Log in" : "logging ..."}
         </button>
       </form>
     </div>

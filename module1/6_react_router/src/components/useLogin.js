@@ -11,7 +11,7 @@ export function useLogin() {
       }),
     onSuccess: (user) => {
       console.log(user);
-      navigate("/home");
+      navigate("/");
     },
     onError: (err) => {
       console.log("Error", err);
