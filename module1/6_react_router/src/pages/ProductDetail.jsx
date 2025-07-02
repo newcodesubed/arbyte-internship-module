@@ -43,7 +43,15 @@ const ProductDetail = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 200,
+      }}
+    >
       <h1>Product Details</h1>
       <p>
         <strong>ID:</strong> {productData.id}

@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import ProductDetail from "./pages/ProductDetail";
 import PageNotFound from "./pages/PageNotFound";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="products" element={<Product />} />
           <Route path="/products/:productId" element={<ProductDetail />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
