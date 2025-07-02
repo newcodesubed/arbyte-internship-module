@@ -1,16 +1,22 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Layout from "./pages/Layout";
+import ProductDetail from "./pages/ProductDetail";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Navigate replace to="home" />} />
-        <Route path="home" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="/products/:productId" element={<ProductDetail />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
