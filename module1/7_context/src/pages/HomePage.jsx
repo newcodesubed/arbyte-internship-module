@@ -5,7 +5,7 @@ import ThemeToggle from "../components/common/ThemeToggle";
 
 export default function HomePage({ onLogout }) {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", height: "100vh" }}>
       <AdminSidebar />
       <div style={{ flex: 1, padding: "1rem" }}>
         <UserHeader onLogout={onLogout} />
