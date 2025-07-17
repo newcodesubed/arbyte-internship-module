@@ -13,15 +13,19 @@ export default function UserHeader({ onLogout }) {
         borderRadius: "4px",
       }}
     >
-      <div
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: "50%",
-          backgroundColor: "lightgray",
-          marginRight: "1rem",
-        }}
-      ></div>
+      <div>
+        <img
+          src="https://i.pravatar.cc/40?img=2"
+          alt="user image"
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            backgroundColor: "lightgray",
+            marginRight: "1rem",
+          }}
+        />
+      </div>
       <div>
         <div>{user.name}</div>
         <div>{user.email}</div>
