@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Calculator from "./Calculator";
 import ToggleSounds from "./ToggleSounds";
+import TimerDisplay from "./TimerDisplay";
+import FormWizard from "./FormWizard";
 
 function formatTime(date) {
   return new Intl.DateTimeFormat("en", {
@@ -11,10 +13,24 @@ function formatTime(date) {
     second: "2-digit",
   }).format(date);
 }
+
 function App() {
   const [allowSound, setAllowSound] = useState(true);
   const [time, setTime] = useState(formatTime(new Date()));
-  useEffect(function () {
+
+  const partOfDay = time.slice(-2);
+
+  const workouts = useMemo(() => {
+    return [
+      { name: "Full-body workout", numExercises: partOfDay === "AM" ? 9 : 8 },
+      { name: "Arms + Legs", numExercises: 6 },
+      { name: "Arms only", numExercises: 3 },
+      { name: "Legs only", numExercises: 4 },
+      { name: "Core only", numExercises: partOfDay === "AM" ? 5 : 4 },
+    ];
+  }, [partOfDay]);
+
+  useEffect(() => {
     const id = setInterval(() => {
       setTime(formatTime(new Date()));
     }, 1000);
@@ -28,6 +44,10 @@ function App() {
       <time>For your workout on {time}</time>
       <ToggleSounds allowSound={allowSound} setAllowSound={setAllowSound} />
       <Calculator workouts={workouts} allowSound={allowSound} />
+      <hr />
+      <TimerDisplay />
+      <hr />
+      <FormWizard />
     </main>
   );
 }
