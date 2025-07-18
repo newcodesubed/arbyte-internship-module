@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
-import clickSound from "./ClickSound.m4a";
-import { useCounter } from "./hooks/useCounter";
+import clickSound from "../ClickSound.m4a";
+import { useCounter } from "../hooks/useCounter";
 
 function Calculator({ workouts, allowSound }) {
   const [number, setNumber] = useState(workouts.at(0).numExercises);
@@ -17,7 +17,7 @@ function Calculator({ workouts, allowSound }) {
 
     setCalculatedDuration(computed);
     durationCounter.reset();
-  }, [number, sets, speed, durationBreak]);
+  }, [number, sets, speed, durationBreak, durationCounter]);
 
   useEffect(() => {
     if (!allowSound) return;

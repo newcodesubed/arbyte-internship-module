@@ -1,4 +1,4 @@
-import { useFormWizard } from "./hooks/useFormWizard";
+import { useFormWizard } from "../hooks/useFormWizard";
 
 function FormWizard() {
   const { step, formData, next, prev, updateData, reset } = useFormWizard(
