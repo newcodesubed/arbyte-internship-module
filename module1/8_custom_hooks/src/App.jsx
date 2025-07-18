@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Calculator from "./Calculator";
 import ToggleSounds from "./ToggleSounds";
-import TimerDisplay from "./TimerDisplay";
+import TimerDisplay from "./TimerDisplay.jsx";
 import FormWizard from "./FormWizard";
 
 function formatTime(date) {
