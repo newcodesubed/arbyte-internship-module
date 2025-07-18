@@ -27,6 +27,8 @@ main {
     0px 6.7px 6.7px rgba(0, 0, 0, 0.04), 0px 12.5px 12.5px rgba(0, 0, 0, 0.05),
     0px 22.3px 22.3px rgba(0, 0, 0, 0.06),
     0px 41.8px 41.8px rgba(0, 0, 0, 0.072), 0px 100px 100px rgba(0, 0, 0, 0.1);
+  max-width: 80rem;
+  width: 100%;
 }
 
 h1 {
@@ -48,8 +50,7 @@ time {
   display: block;
   width: 36rem;
   text-align: center;
-  margin: 0 auto;
-  margin-bottom: 4rem;
+  margin: 0 auto 4rem auto;
   background-color: #e7e7e7;
   border-radius: 9px;
   padding: 1rem;
@@ -93,36 +94,59 @@ span {
 
 section {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 1.2rem;
   background-color: #e7e7e7;
   border-radius: 9px;
   padding: 1.6rem;
+  margin-top: 2rem;
 }
 
-p {
-  font-size: 6rem;
-  font-weight: 900;
-  text-align: center;
-  background-clip: text;
-  background-image: linear-gradient(to right bottom, #80dfe1, #4e7afa);
-  color: transparent;
+section h2 {
+  font-size: 2rem;
+  color: #4e7afa;
+}
+
+section p {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+section input,
+section textarea {
+  width: 80%;
+  padding: 0.8rem;
+  font-size: 1.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 button {
   height: 3.6rem;
-  aspect-ratio: 1;
-  display: flex;
+  padding: 0 1.2rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 5px;
   border: none;
   background-color: #67adee;
   color: #fff;
-  font-weight: 900;
-  font-size: 1.8rem;
+  font-weight: 700;
+  font-size: 1.6rem;
   cursor: pointer;
+  margin: 0.4rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #4a9fee;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
 .btn-sound {
@@ -131,4 +155,5 @@ button {
   right: 3.2rem;
   background-color: transparent;
   font-size: 3.2rem;
+  cursor: pointer;
 }
