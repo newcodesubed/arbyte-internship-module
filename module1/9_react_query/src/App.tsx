@@ -1,3 +1,32 @@
+import { useEffect } from "react";
+import { useFakeQuery } from "./hooks/useFakeQuery";
+import { ItemList } from "./components/ItemList";
+import { AddItemForm } from "./components/AddItemForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function App() {
-  return <div className="flex justify-center bg-red-900">HEllo</div>;
+  const { data, loading } = useFakeQuery();
+
+  useEffect(() => {
+    if (!loading) {
+      const parsed = data.map((name, i) => ({
+        id: String(i),
+        name,
+        category: "Monitor",
+        color: "Black",
+      }));
+      setItems(parsed);
+    }
+  }, [loading, data, setItems]);
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <AddItemForm />
+      <ItemList />
+      <ToastContainer />
+    </div>
+  );
 }
