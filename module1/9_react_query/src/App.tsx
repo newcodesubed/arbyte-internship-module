@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useFakeQuery } from "./hooks/useFakeQuery";
+import { useItemStore } from "./stores/itemStore";
 import { ItemList } from "./components/ItemList";
 import { AddItemForm } from "./components/AddItemForm";
 import { ToastContainer } from "react-toastify";
@@ -7,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   const { data, loading } = useFakeQuery();
+  const setItems = useItemStore((s) => s.setItems);
 
   useEffect(() => {
     if (!loading) {
