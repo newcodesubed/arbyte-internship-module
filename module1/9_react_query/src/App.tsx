@@ -1,3 +1,3 @@
 export default function App() {
-  return <div>HEllo</div>;
+  return <div className="flex justify-center bg-red-900">HEllo</div>;
 }
