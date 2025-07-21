@@ -9,6 +9,8 @@ export const AddItemForm = () => {
   const [name, setName] = useState("");
 
   const handleSubmit = () => {
+    if (!name.trim()) return;
+
     const id = nanoid();
     const item = {
       id,
@@ -20,7 +22,7 @@ export const AddItemForm = () => {
     addItem(item);
 
     setTimeout(() => {
-      const success = Math.random() > 0.2; // 80% success
+      const success = Math.random() > 0.2;
       if (success) {
         toast.success("Item added successfully!");
       } else {
@@ -28,16 +30,24 @@ export const AddItemForm = () => {
         toast.error("Failed to add item.");
       }
     }, 1000);
+
+    setName("");
   };
 
   return (
-    <div>
+    <div className="mb-4">
       <input
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Item name"
+        className="border p-2 rounded mr-2"
       />
-      <button onClick={handleSubmit}>Add</button>
+      <button
+        onClick={handleSubmit}
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Add
+      </button>
     </div>
   );
 };
