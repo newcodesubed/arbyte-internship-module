@@ -1,23 +1,28 @@
-import { useItemStore } from "../stores/itemStore";
+import { useStore } from "zustand";
+import { itemStore } from "../stores/itemStore";
 
 export default function ItemList() {
-  const filteredItems = useItemStore((s) => s.filteredItems());
-  const counts = useItemStore((s) => s.counts());
-  const deleteItem = useItemStore((s) => s.deleteItem);
+  const items = useStore(itemStore, (s) => s.items);
+  const filterCategory = useStore(itemStore, (s) => s.filterCategory);
+  const filterColor = useStore(itemStore, (s) => s.filterColor);
+  const deleteItem = useStore(itemStore, (s) => s.deleteItem);
+
+  const filteredItems = items.filter(
+    (item) =>
+      (filterCategory === "All" || item.category === filterCategory) &&
+      (filterColor === "All" || item.color === filterColor)
+  );
 
   return (
-    <div>
+    <div className="p-2">
       <p className="text-sm text-gray-600 mb-2">
-        Showing {counts.filtered} of {counts.total} items
+        Showing {filteredItems.length} of {items.length} items
       </p>
-      <div className="space-y-2">
+      <div className="space-y-1">
         {filteredItems.map((item) => (
-          <div
-            key={item.id}
-            className="flex justify-between items-center border-b py-1"
-          >
+          <div key={item.id} className="flex justify-between border-b py-1">
             <span>
-              {item.name} - {item.category} - {item.color}
+              {item.name} — {item.category} — {item.color}
             </span>
             <button
               onClick={() => deleteItem(item.id)}
