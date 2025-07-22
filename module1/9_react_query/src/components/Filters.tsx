@@ -1,18 +1,20 @@
-import { useItemStore } from "../stores/itemStore";
-import type { Category, Color } from "../stores/itemStore";
+import { useStore } from "zustand";
+import { itemStore } from "../stores/itemStore";
 
 export default function Filters() {
-  const filterCategory = useItemStore((s) => s.filterCategory);
-  const filterColor = useItemStore((s) => s.filterColor);
-  const setFilterCategory = useItemStore((s) => s.setFilterCategory);
-  const setFilterColor = useItemStore((s) => s.setFilterColor);
+  const filterCategory = useStore(itemStore, (s) => s.filterCategory);
+  const filterColor = useStore(itemStore, (s) => s.filterColor);
+  const setFilterCategory = useStore(itemStore, (s) => s.setFilterCategory);
+  const setFilterColor = useStore(itemStore, (s) => s.setFilterColor);
 
   return (
-    <div className="flex gap-2 mb-4">
+    <div className="flex gap-4 p-2">
       <select
         value={filterCategory}
-        onChange={(e) => setFilterCategory(e.target.value as Category)}
-        className="border px-2 py-1 rounded"
+        onChange={(e) =>
+          setFilterCategory(e.target.value as typeof filterCategory)
+        }
+        className="border p-1"
       >
         <option>All</option>
         <option>Monitor</option>
@@ -22,14 +24,13 @@ export default function Filters() {
 
       <select
         value={filterColor}
-        onChange={(e) => setFilterColor(e.target.value as Color)}
-        className="border px-2 py-1 rounded"
+        onChange={(e) => setFilterColor(e.target.value as typeof filterColor)}
+        className="border p-1"
       >
         <option>All</option>
         <option>Black</option>
         <option>White</option>
-        <option>Red</option>
-        <option>Blue</option>
+        <option>Gray</option>
       </select>
     </div>
   );
