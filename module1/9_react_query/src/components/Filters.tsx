@@ -1,34 +1,36 @@
-import { useFilterStore } from "../stores/filterStore";
-import type { CategoryFilter, ColorFilter } from "../stores/filterStore";
+import { useItemStore } from "../stores/itemStore";
+import type { Category, Color } from "../stores/itemStore";
 
-export const Filters = () => {
-  const category = useFilterStore((s) => s.category);
-  const color = useFilterStore((s) => s.color);
-  const setCategory = useFilterStore((s) => s.setCategory);
-  const setColor = useFilterStore((s) => s.setColor);
+export default function Filters() {
+  const filterCategory = useItemStore((s) => s.filterCategory);
+  const filterColor = useItemStore((s) => s.filterColor);
+  const setFilterCategory = useItemStore((s) => s.setFilterCategory);
+  const setFilterColor = useItemStore((s) => s.setFilterColor);
 
   return (
-    <div className="flex gap-4 mb-4">
+    <div className="flex gap-2 mb-4">
       <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value as CategoryFilter)}
-        className="border p-2 rounded"
+        value={filterCategory}
+        onChange={(e) => setFilterCategory(e.target.value as Category)}
+        className="border px-2 py-1 rounded"
       >
-        <option value="All">All Categories</option>
-        <option value="Monitor">Monitor</option>
-        <option value="Keyboard">Keyboard</option>
-        <option value="Mouse">Mouse</option>
+        <option>All</option>
+        <option>Monitor</option>
+        <option>Keyboard</option>
+        <option>Mouse</option>
       </select>
 
       <select
-        value={color}
-        onChange={(e) => setColor(e.target.value as ColorFilter)}
-        className="border p-2 rounded"
+        value={filterColor}
+        onChange={(e) => setFilterColor(e.target.value as Color)}
+        className="border px-2 py-1 rounded"
       >
-        <option value="All">All Colors</option>
-        <option value="Black">Black</option>
-        <option value="White">White</option>
+        <option>All</option>
+        <option>Black</option>
+        <option>White</option>
+        <option>Red</option>
+        <option>Blue</option>
       </select>
     </div>
   );
-};
+}
