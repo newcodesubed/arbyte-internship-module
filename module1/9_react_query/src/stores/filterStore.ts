@@ -1,29 +1,31 @@
 import { create } from "zustand";
 import { useItemStore } from "./itemStore";
+import type { Item } from "./itemStore";
 
-type FilterState = {
-  category: "All" | "Monitor" | "Keyboard" | "Mouse";
-  color: "All" | "Black" | "White";
-  setCategory: (cat: FilterState["category"]) => void;
-  setColor: (color: FilterState["color"]) => void;
-  filteredItems: () => ReturnType<typeof useItemStore.getState>["items"];
+export type CategoryFilter = "All" | "Monitor" | "Keyboard" | "Mouse";
+export type ColorFilter = "All" | "Black" | "White";
+
+type State = {
+  category: CategoryFilter;
+  color: ColorFilter;
+  setCategory: (category: CategoryFilter) => void;
+  setColor: (color: ColorFilter) => void;
+  filteredItems: () => Item[];
   itemCount: () => number;
 };
 
-export const useFilterStore = create<FilterState>((set, get) => ({
+export const useFilterStore = create<State>((set, get) => ({
   category: "All",
   color: "All",
   setCategory: (category) => set({ category }),
   setColor: (color) => set({ color }),
   filteredItems: () => {
-    const { items } = useItemStore.getState();
     const { category, color } = get();
-
-    return items.filter((item) => {
-      const catMatch = category === "All" || item.category === category;
-      const colorMatch = color === "All" || item.color === color;
-      return catMatch && colorMatch;
-    });
+    let items = useItemStore.getState().items;
+    if (category !== "All")
+      items = items.filter((i) => i.category === category);
+    if (color !== "All") items = items.filter((i) => i.color === color);
+    return items;
   },
   itemCount: () => get().filteredItems().length,
 }));

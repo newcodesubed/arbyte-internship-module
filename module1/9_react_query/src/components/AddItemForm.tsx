@@ -1,7 +1,7 @@
 import { useItemStore } from "../stores/itemStore";
+import { nanoid } from "nanoid";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { nanoid } from "nanoid";
 
 export const AddItemForm = () => {
   const addItem = useItemStore((s) => s.addItem);
@@ -15,8 +15,8 @@ export const AddItemForm = () => {
     const item = {
       id,
       name,
-      category: "Monitor",
-      color: "Black",
+      category: "Monitor" as const,
+      color: "Black" as const,
     };
 
     addItem(item);

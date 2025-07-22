@@ -1,4 +1,5 @@
 import { useFilterStore } from "../stores/filterStore";
+import type { CategoryFilter, ColorFilter } from "../stores/filterStore";
 
 export const Filters = () => {
   const category = useFilterStore((s) => s.category);
@@ -10,7 +11,7 @@ export const Filters = () => {
     <div className="flex gap-4 mb-4">
       <select
         value={category}
-        onChange={(e) => setCategory(e.target.value as any)}
+        onChange={(e) => setCategory(e.target.value as CategoryFilter)}
         className="border p-2 rounded"
       >
         <option value="All">All Categories</option>
@@ -21,7 +22,7 @@ export const Filters = () => {
 
       <select
         value={color}
-        onChange={(e) => setColor(e.target.value as any)}
+        onChange={(e) => setColor(e.target.value as ColorFilter)}
         className="border p-2 rounded"
       >
         <option value="All">All Colors</option>
