@@ -1,53 +1,67 @@
-import { useItemStore } from "../stores/itemStore";
-import { nanoid } from "nanoid";
 import { useState } from "react";
+import { useItemStore } from "../stores/itemStore";
+import type { Category, Color } from "../stores/itemStore";
 import { toast } from "react-toastify";
 
-export const AddItemForm = () => {
+export default function AddItemForm() {
   const addItem = useItemStore((s) => s.addItem);
-  const removeItem = useItemStore((s) => s.removeItem);
+
   const [name, setName] = useState("");
+  const [category, setCategory] = useState<Category>("Monitor");
+  const [color, setColor] = useState<Color>("Black");
 
-  const handleSubmit = () => {
-    if (!name.trim()) return;
+  const handleAdd = () => {
+    if (!name.trim()) {
+      toast.error("Name is required");
+      return;
+    }
 
-    const id = nanoid();
-    const item = {
-      id,
+    addItem({
+      id: Date.now().toString(),
       name,
-      category: "Monitor" as const,
-      color: "Black" as const,
-    };
+      category,
+      color,
+    });
 
-    addItem(item);
-
-    setTimeout(() => {
-      const success = Math.random() > 0.2;
-      if (success) {
-        toast.success("Item added successfully!");
-      } else {
-        removeItem(id);
-        toast.error("Failed to add item.");
-      }
-    }, 1000);
-
+    toast.success("Item added successfully");
     setName("");
+    setCategory("Monitor");
+    setColor("Black");
   };
 
   return (
-    <div className="mb-4">
+    <div className="space-y-2 p-4 border rounded-xl">
       <input
+        className="border px-2 py-1 w-full rounded"
+        placeholder="Item name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Item name"
-        className="border p-2 rounded mr-2"
       />
+      <select
+        className="border px-2 py-1 w-full rounded"
+        value={category}
+        onChange={(e) => setCategory(e.target.value as Category)}
+      >
+        <option>Monitor</option>
+        <option>Keyboard</option>
+        <option>Mouse</option>
+      </select>
+      <select
+        className="border px-2 py-1 w-full rounded"
+        value={color}
+        onChange={(e) => setColor(e.target.value as Color)}
+      >
+        <option>Black</option>
+        <option>White</option>
+        <option>Red</option>
+        <option>Blue</option>
+      </select>
       <button
-        onClick={handleSubmit}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        onClick={handleAdd}
+        className="bg-blue-600 text-white px-4 py-1 rounded w-full"
       >
         Add
       </button>
     </div>
   );
-};
+}
