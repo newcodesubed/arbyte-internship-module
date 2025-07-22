@@ -1,30 +1,23 @@
-import { create } from "zustand";
-
-export type Category = "Monitor" | "Keyboard" | "Mouse" | "All";
-export type Color = "Black" | "White" | "Red" | "Blue" | "All";
+import { createStore } from "zustand/vanilla";
 
 export type Item = {
   id: string;
   name: string;
-  category: Category;
-  color: Color;
+  category: "Monitor" | "Keyboard" | "Mouse";
+  color: "Black" | "White" | "Gray";
 };
 
 type State = {
   items: Item[];
-  filterCategory: Category;
-  filterColor: Color;
-
+  filterCategory: "All" | Item["category"];
+  filterColor: "All" | Item["color"];
   addItem: (item: Item) => void;
   deleteItem: (id: string) => void;
-  setFilterCategory: (category: Category) => void;
-  setFilterColor: (color: Color) => void;
-
-  filteredItems: () => Item[];
-  counts: () => { total: number; filtered: number };
+  setFilterCategory: (cat: State["filterCategory"]) => void;
+  setFilterColor: (color: State["filterColor"]) => void;
 };
 
-export const useItemStore = create<State>((set, get) => ({
+export const itemStore = createStore<State>((set) => ({
   items: [
     { id: "1", name: "Dell UltraSharp", category: "Monitor", color: "Black" },
     { id: "2", name: "Logitech MX Keys", category: "Keyboard", color: "White" },
@@ -32,31 +25,9 @@ export const useItemStore = create<State>((set, get) => ({
   filterCategory: "All",
   filterColor: "All",
 
-  addItem: (item) =>
-    set((state) => ({
-      items: [...state.items, item],
-    })),
-
+  addItem: (item) => set((s) => ({ items: [...s.items, item] })),
   deleteItem: (id) =>
-    set((state) => ({
-      items: state.items.filter((item) => item.id !== id),
-    })),
-
-  setFilterCategory: (category) => set({ filterCategory: category }),
+    set((s) => ({ items: s.items.filter((i) => i.id !== id) })),
+  setFilterCategory: (cat) => set({ filterCategory: cat }),
   setFilterColor: (color) => set({ filterColor: color }),
-
-  filteredItems: () => {
-    const { items, filterCategory, filterColor } = get();
-    return items.filter(
-      (item) =>
-        (filterCategory === "All" || item.category === filterCategory) &&
-        (filterColor === "All" || item.color === filterColor)
-    );
-  },
-
-  counts: () => {
-    const total = get().items.length;
-    const filtered = get().filteredItems().length;
-    return { total, filtered };
-  },
 }));
