@@ -1,18 +1,7 @@
-import { Outlet, Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-export default function Dashboard() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-      <div className="flex gap-4 mt-2">
-        <Link to="users" className="text-blue-500">
-          Users
-        </Link>
-        <Link to="settings" className="text-blue-500">
-          Settings
-        </Link>
-      </div>
-      <Outlet />
-    </div>
-  );
+export default function AdminRoute({ auth, children }) {
+  if (!auth.isAuthenticated) return <Navigate to="/login" replace />;
+  if (auth.role !== "admin") return <Navigate to="/not-authorized" replace />;
+  return children;
 }
