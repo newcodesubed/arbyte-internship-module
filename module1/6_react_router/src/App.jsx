@@ -1,5 +1,11 @@
 import React, { useState, Suspense, lazy } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Link,
+} from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 
@@ -11,6 +17,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DashboardUsers = lazy(() => import("./pages/DashboardUsers"));
 const DashboardSettings = lazy(() => import("./pages/DashboardSettings"));
 const AddProduct = lazy(() => import("./pages/AddProduct"));
+const NotAuthorized = lazy(() => import("./pages/NotAuthorized"));
 
 export default function App() {
   const [auth, setAuth] = useState({ isAuthenticated: false, role: null });
@@ -20,51 +27,92 @@ export default function App() {
 
   return (
     <Router>
-      <div className="p-4 flex gap-4 bg-gray-200">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/add-product">Add Product</Link>
-        {auth.isAuthenticated && (
-          <button
-            onClick={logout}
-            className="ml-auto bg-red-500 text-white px-2 rounded"
-          >
-            Logout ({auth.role})
-          </button>
-        )}
-      </div>
+      <NavBar auth={auth} logout={logout} />
 
       <Suspense fallback={<div className="p-4">Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          {/* Redirect to login if not authenticated */}
+          <Route
+            path="/"
+            element={
+              auth.isAuthenticated ? (
+                <Navigate to="/home" />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+
           <Route path="/login" element={<Login login={login} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/post/:id" element={<PostDetail />} />
 
+          {/* Home is protected for both roles */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute auth={auth}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/post/:id"
+            element={
+              <ProtectedRoute auth={auth}>
+                <PostDetail />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Admin Dashboard */}
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute auth={auth}>
+              <AdminRoute auth={auth}>
                 <Dashboard />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           >
             <Route path="users" element={<DashboardUsers />} />
             <Route path="settings" element={<DashboardSettings />} />
+            <Route path="add-product" element={<AddProduct />} />
           </Route>
 
-          <Route
-            path="/add-product"
-            element={
-              <AdminRoute auth={auth}>
-                <AddProduct />
-              </AdminRoute>
-            }
-          />
+          {/* Not Authorized Page */}
+          <Route path="/not-authorized" element={<NotAuthorized />} />
+
+          {/* Catch all route */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
     </Router>
+  );
+}
+
+function NavBar({ auth, logout }) {
+  return (
+    <div className="p-4 flex gap-4 bg-gray-200">
+      {auth.isAuthenticated && (
+        <>
+          <Link to="/home">Home</Link>
+          {auth.role === "admin" && <Link to="/dashboard">Dashboard</Link>}
+        </>
+      )}
+      {!auth.isAuthenticated && (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </>
+      )}
+      {auth.isAuthenticated && (
+        <button
+          onClick={logout}
+          className="ml-auto bg-red-500 text-white px-2 rounded"
+        >
+          Logout ({auth.role})
+        </button>
+      )}
+    </div>
   );
 }
