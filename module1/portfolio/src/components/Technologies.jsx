@@ -1,13 +1,16 @@
 import { FaHtml5, FaCss3Alt, FaNodeJs, FaDocker, FaAws, FaLinux, FaGithub } from "react-icons/fa";
 import { RiReactjsLine } from "react-icons/ri";
+import {TbBrandNextjs} from "react-icons/tb";
 import {
   SiJavascript,
   SiTailwindcss,
   SiReactquery,
   SiMongodb,
   SiPostgresql,
-  
+  SiBlender, 
+  SiAdobephotoshop,
   SiC,
+  
   SiCplusplus,
   SiExpress,
   SiRedux,
@@ -37,7 +40,9 @@ function Technologies() {
         <SiJavascript className="text-7xl text-[#f7df1e]" title="JavaScript" />
       </div>
 
-      
+      <div>
+        <TbBrandNextjs className="text-7xl" title="Next.js" />
+      </div>
 
       {/* tailwind */}
       <div>
@@ -110,6 +115,13 @@ function Technologies() {
       {/* supabase */}
       <div>
         <SiSupabase className="text-7xl text-[#3ee0c9]" title="Supabase" />
+      </div>
+      <div>
+        <SiBlender className="text-7xl text-[#F5792A]" title="Blender" />
+      </div>
+      <div>
+        <SiAdobephotoshop className="text-7xl text-[#31A8FF]" title="Adobe Photoshop" />
+
       </div>
     </div>
         </div>
