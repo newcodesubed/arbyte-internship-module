@@ -1,5 +1,5 @@
 
-import profilePic from '../assets/raviKumarProfile.webp';
+import profilePic from '../assets/subedportfolio.webp';
 import {HERO_CONTENT} from '../constants';
 import {motion} from 'framer-motion';
 
@@ -57,7 +57,7 @@ function Hero() {
                     className='my-2 max-w-lg motion.py-6 text-xl leading-relaxed tracking-tighter'>{HERO_CONTENT}</motion.p>
                     <motion.a
                     variants={childVariants}
-                    href="/resume.pdf"
+                    href="/subedshahCV.pdf"
                     target='_blank'
                     rel='noopener noreferrer' download className='bg-white text-stone-800 rounded-full p-4 text-sm mb-10' >
                         Download Resume

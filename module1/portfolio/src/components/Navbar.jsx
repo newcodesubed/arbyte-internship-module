@@ -1,6 +1,6 @@
 import { FaLinkedinIn, FaGithub,FaInstagram } from "react-icons/fa";
 
-import logo from '../assets/raviKumarLogo.webp';
+import logo from '../assets/logo.webp';
 function Navbar() {
   return (
     <nav className="flex items-center justify-between py-6">
