@@ -16,114 +16,200 @@ import {
   SiRedux,
   SiSupabase
 } from "react-icons/si";
+import { motion } from "framer-motion";
+const iconVariants =(duration)=> ({
+  initial: {  y: -20 },
+  animate: { 
+    y:[10, -10],
+    transition: {
+      duration: duration,
+      repeat: Infinity,
+      ease: "linear",
+      repeatType: "reverse"
+    }
+   }
+})
+
 function Technologies() {
   return (
     <div className="pb-24">
-        <h2 className="my-20 text-center text-4xl">Technologies</h2>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-    <div>
+        <motion.h2
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: -100 }}
+        transition={{ duration: 1.5 }}
+        className="my-20 text-center text-4xl">Technologies</motion.h2>
+        <motion.div 
+        whileInView={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, x: -100 }}
+        transition={{ duration: 1.5 }}
+        className="flex flex-wrap items-center justify-center gap-4">
+    <motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2.5)}
+    >
         <RiReactjsLine className="text-7xl text-cyan-400"/>
 
-    </div>
+    </motion.div>
     {/* html */}
-      <div>
-        <FaHtml5 className="text-7xl text-[#e34f26]" title="HTML" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(3)}
+    >        <FaHtml5 className="text-7xl text-[#e34f26]" title="HTML" />
+      </motion.div>
 
       {/* css */}
-      <div>
-        <FaCss3Alt className="text-7xl text-[#1572B6]" title="CSS" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(5)}
+    >        <FaCss3Alt className="text-7xl text-[#1572B6]" title="CSS" />
+      </motion.div>
 
       {/* javascript */}
-      <div>
-        <SiJavascript className="text-7xl text-[#f7df1e]" title="JavaScript" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2.5)}
+    >        <SiJavascript className="text-7xl text-[#f7df1e]" title="JavaScript" />
+      </motion.div>
 
-      <div>
-        <TbBrandNextjs className="text-7xl" title="Next.js" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(4)}
+    >        <TbBrandNextjs className="text-7xl" title="Next.js" />
+      </motion.div>
 
       {/* tailwind */}
-      <div>
-        <SiTailwindcss className="text-7xl text-[#38bdf8]" title="Tailwind CSS" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2)}
+    >        <SiTailwindcss className="text-7xl text-[#38bdf8]" title="Tailwind CSS" />
+      </motion.div>
 
       {/* react-query */}
-      <div>
-        <SiReactquery className="text-7xl text-[#ff4154]" title="React Query / TanStack Query" />
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(3)}
+    >        <SiReactquery className="text-7xl text-[#ff4154]" title="React Query / TanStack Query" />
         {/* React Query / TanStack Query uses a red-ish brand in many places; adjust hex if you prefer */}
-      </div>
+      </motion.div>
 
       {/* nodejs */}
-      <div>
-        <FaNodeJs className="text-7xl text-[#3c873a]" title="Node.js" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(6)}
+    >        <FaNodeJs className="text-7xl text-[#3c873a]" title="Node.js" />
+      </motion.div>
 
       {/* mongodb */}
-      <div>
-        <SiMongodb className="text-7xl text-[#47A248]" title="MongoDB" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2.5)}
+    >        <SiMongodb className="text-7xl text-[#47A248]" title="MongoDB" />
+      </motion.div>
 
       {/* postgresql */}
-      <div>
-        <SiPostgresql className="text-7xl text-[#336791]" title="PostgreSQL" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(5)}
+    >        <SiPostgresql className="text-7xl text-[#336791]" title="PostgreSQL" />
+      </motion.div>
 
       {/* docker */}
-      <div>
-        <FaDocker className="text-7xl text-[#0db7ed]" title="Docker" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2)}
+    >        <FaDocker className="text-7xl text-[#0db7ed]" title="Docker" />
+      </motion.div>
 
       {/* aws */}
-      <div>
-        <FaAws className="text-7xl text-[#ff9900]" title="AWS" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(3)}
+    >        <FaAws className="text-7xl text-[#ff9900]" title="AWS" />
+      </motion.div>
 
       {/* linux */}
-      <div>
-        <FaLinux className="text-7xl text-[#5a460b]" title="Linux" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(6)}
+    >        <FaLinux className="text-7xl text-[#5a460b]" title="Linux" />
+      </motion.div>
 
       
 
       {/* github */}
-      <div>
-        <FaGithub className="text-7xl text-[#171515]" title="GitHub" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2.5)}
+    >        <FaGithub className="text-7xl text-[#171515]" title="GitHub" />
+      </motion.div>
 
       {/* C */}
-      <div>
-        <SiC className="text-7xl text-[#A8B9CC]" title="C" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(5)}
+    >        <SiC className="text-7xl text-[#A8B9CC]" title="C" />
+      </motion.div>
 
       {/* C++ */}
-      <div>
-        <SiCplusplus className="text-7xl text-[#00599C]" title="C++" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(3)}
+    >        <SiCplusplus className="text-7xl text-[#00599C]" title="C++" />
+      </motion.div>
 
       {/* express.js */}
-      <div>
-        <SiExpress className="text-7xl text-[#000000]" title="Express.js" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2.5)}
+    >        <SiExpress className="text-7xl text-[#000000]" title="Express.js" />
+      </motion.div>
 
       {/* redux */}
-      <div>
-        <SiRedux className="text-7xl text-[#764abc]" title="Redux" />
-      </div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(5)}
+    >        <SiRedux className="text-7xl text-[#764abc]" title="Redux" />
+      </motion.div>
 
       {/* supabase */}
-      <div>
-        <SiSupabase className="text-7xl text-[#3ee0c9]" title="Supabase" />
-      </div>
-      <div>
-        <SiBlender className="text-7xl text-[#F5792A]" title="Blender" />
-      </div>
-      <div>
-        <SiAdobephotoshop className="text-7xl text-[#31A8FF]" title="Adobe Photoshop" />
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(3)}
+    >        <SiSupabase className="text-7xl text-[#3ee0c9]" title="Supabase" />
+      </motion.div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(4)}
+    >        <SiBlender className="text-7xl text-[#F5792A]" title="Blender" />
+      </motion.div>
+<motion.div
+        initial="initial"
+        animate="animate"
+        variants={iconVariants(2.5)}
+    >        <SiAdobephotoshop className="text-7xl text-[#31A8FF]" title="Adobe Photoshop" />
 
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
         </div>
     
   )
